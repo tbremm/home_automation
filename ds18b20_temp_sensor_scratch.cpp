@@ -1,6 +1,9 @@
 // Interfacing with the DS18B20 temperature sensor
 // Code inspired by https://www.raspberrypi.org/forums/viewtopic.php?t=70709
 
+// Expects the sensor data pin to be connected to GPIO #4
+// Need resistor between data and 3.3v VCC (works with 2x2K in series)
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <wiringPi.h>
