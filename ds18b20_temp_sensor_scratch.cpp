@@ -30,7 +30,7 @@ int main ()
         fp = fopen(file_sensor,"r");
 
         if (NULL == fp) {
-            printf("\nfopen Error!!!\n\n");
+            printf("\nfopen Error, could not open sensor file\n\n");
             return 1;
         }
 
