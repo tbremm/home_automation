@@ -4,8 +4,6 @@
 // Expects the sensor data pin to be connected to GPIO #4
 // Need resistor between data and 3.3v VCC (works with 2x2K in series)
 
-// Adding comment to test git cred storage - DELETE THIS LINE
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <wiringPi.h>
