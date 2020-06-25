@@ -3,9 +3,14 @@
 #ifndef LCD_2004A_I2C_H_
 #define LCD_2004A_I2C_H_
 
+#include <stdio.h>
+#include <wiringPi.h>
+#include <wiringPiI2C.h>
+#include <string.h>
+
 // Typical values
-#define I2C_ADDR = 0x27
-#define BLEN = 1
+#define I2C_ADDR 0x27
+#define BLEN 1
 
 class lcd_2004a_i2c {
     private:

@@ -10,10 +10,6 @@
 // Default I2C address is 0x27
 // Run "i2cdetect -y 1" in the terminal to see the I2C device
 
-#include <stdio.h>
-#include <wiringPi.h>
-#include <wiringPiI2C.h>
-#include <string.h>
 #include "lcd_2004a_i2c.h"
 
 lcd_2004a_i2c::lcd_2004a_i2c(int in_i2c_address, int in_blen) {
