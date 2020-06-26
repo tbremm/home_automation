@@ -9,7 +9,7 @@ MAIN_SOURCES = $(SRCDIR)/main
 ALL_SOURCES = $(LCD_SOURCES)/*.cpp $(TEMP_SENSOR_SOURCES)/*.cpp $(MAIN_SOURCES)/*.cpp
 
 CXX = g++
-CXXFLAGS = -Wall -I$(IDIR) -lwiringPi
+CXXFLAGS = -Wall -std=c++11 -I$(IDIR) -lwiringPi
 
 LCDOBJECTS = lcd_2004a_i2c.o
 TEMPOBJECTS = ds18b20_temp_sensor.o
