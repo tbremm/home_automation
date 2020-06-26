@@ -13,9 +13,9 @@ CXXFLAGS = -Wall -I$(IDIR) -lwiringPi
 
 LCDOBJECTS = lcd_2004a_i2c.o
 TEMPOBJECTS = ds18b20_temp_sensor.o
-MAINOBJECTS = my_main.o
-LIBOBJECTS = $(SRCDIR)/lcd/lcd_2004a_i2c.o $(SRCDIR)/temp_sensor/ds18b20_temp_sensor.o
-MAINOBJECTS = $(SRCDIR)/main/my_main.o
+MAINOBJECTS = main.o
+LIBOBJECTS = $(ODIR)/lcd_2004a_i2c.o $(ODIR)/ds18b20_temp_sensor.o
+MAINOBJECTS = $(ODIR)/my_main.o
 
 all: lcd.o ds18b20_temp_sensor.o main.o home_auto_temp
 
@@ -28,28 +28,10 @@ ds18b20_temp_sensor.o: $(TEMP_SENSOR_SOURCES)/ds18b20_temp_sensor.cpp
 main.o: $(MAIN_SOURCES)/main.cpp
 	$(CXX) $(CXXFLAGS) -c -o $(ODIR)/$@ $^
 
-home_auto_temp: $(ODIR)/main.o
+home_auto_temp: $(ODIR)/main.o $(ODIR)/lcd.o $(ODIR)/ds18b20_temp_sensor.o
 	$(CXX) $(CXXFLAGS) -o $(BINDIR)/$@ $^
-
-#$(LCD_SOURCES)/lcd_2004a_i2c.o: lcd_2004a_i2c.cpp
-#	$(CXX) $(CXXFLAGS) -o $(ODIR)/$@ $^
-
-#$(TEMP_SENSOR_SOURCES)/ds18b20_temp_sensor.o: ds18b20_temp_sensor.cpp
-#	$(CXX) $(CXXFLAGS) -o $(ODIR)/$@ $^
-
-#$(MAIN_SOURCES)/my_main.o: my_main.cpp
-#	$(CXX) $(CXXFLAGS) -c -o $(ODIR)/$@ $^
-
-#_DEPS = ds18b20_temp_sensor.h lcd_2004a_i2c.h
-#DEPS = $(patsubst %,%(IDIR)/%,$(_DEPS))
-
-#_OBJ = lcd_2004a_i2c.o ds18b20_temp_sensor.o my_main.o
-#OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
-
-#$(ODIR)/%.o: %.c $(DEPS)
-#	$(CC) -o $@ $^ $(CFLAGS)
 
 .PHONY: clean
 
 clean:
-	rm -f $(ODIR)/*.o
+	rm -f $(ODIR)/* && rm -f $(BINDIR)/*
