@@ -15,41 +15,40 @@
 
 using namespace std;
 
+char* format_float (string prefix, int precision, float f);
+char* get_sensor_name ();
+
 int main () {
     printf("Beginning program...\n");
     char* sensor_path = "/sys/bus/w1/devices/28-3c01d6073581/w1_slave";
     int gpio_pin = 4;
     int lcd_i2c_address = 0x27;
     int lcd_blen = 1;
+    float temperature_c = 0.0;
+    float temperature_f = 0.0;
     Ds18b20 temp_sensor(gpio_pin, sensor_path);
     lcd_2004a_i2c lcd (lcd_i2c_address, lcd_blen);
 
-    float temperature_c = temp_sensor.get_temp_c();
-    float temperature_f = temp_sensor.get_temp_f();
-
-    printf("Converting %f to string...\n", temperature_c);
-    stringstream ss_c;
-    stringstream ss_f;
-    ss_c << "C: " << fixed << setprecision(2) << temperature_c;
-    ss_f << "F: " << fixed << setprecision(2) << temperature_f;
-    string sc = ss_c.str();
-    string sf = ss_f.str();
-    int nc = sc.length();
-    char c_out[nc + 1];
-
-    int nf = sf.length();
-    char f_out[nf + 1];
-
-    strcpy(c_out, sc.c_str());
-    cout << sc << "\n";
-    strcpy(f_out, sf.c_str());
-    cout << sf << "\n";
-
+    while(true) {
+        temperature_c = temp_sensor.get_temp_c();
+        temperature_f = temp_sensor.get_temp_f();
+        lcd.clear();
+        lcd.write(0, 0, format_float("C: ", 2, temperature_c));
+        lcd.write(0, 1, format_float("F: ", 2, temperature_f));
+        temp_sensor.print_temp_c();
+        temp_sensor.print_temp_f();
+        delay(1000);
+    }
     lcd.clear();
-    lcd.write(0, 0, c_out);
-    lcd.write(0, 1, f_out);
-    delay(5000);
-    lcd.clear();
-
     return 0;
+}
+
+char* format_float (string prefix, int precision, float f) {
+    stringstream ss;
+    ss << prefix << fixed << setprecision(precision) << f;
+    string str = ss.str();
+    int n = str.length();
+    char* c_out = new char[n + 1];
+    strcpy(c_out, str.c_str());
+    return c_out;
 }
