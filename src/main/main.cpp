@@ -10,16 +10,21 @@
 #include <fcntl.h>
 #include <iomanip>
 #include <sstream>
+#include <glob.h>
 #include "../../headers/ds18b20_temp_sensor.h"
 #include "../../headers/lcd_2004a_i2c.h"
 
 using namespace std;
 
 char* format_float (string prefix, int precision, float f);
-char* get_sensor_name ();
+char** get_sensor_names ();
 
 int main () {
     printf("Beginning program...\n");
+
+    char** sensors = get_sensor_names ();
+    for
+
     char* sensor_path = "/sys/bus/w1/devices/28-3c01d6073581/w1_slave";
     int gpio_pin = 4;
     int lcd_i2c_address = 0x27;
@@ -51,4 +56,17 @@ char* format_float (string prefix, int precision, float f) {
     char* c_out = new char[n + 1];
     strcpy(c_out, str.c_str());
     return c_out;
+}
+
+char** get_sensor_names () {
+    glob_t globbuf;
+    if (glob("/sys/bus/w1/devices/28-*/w1_slave", 0, NULL, globbuf) == GLOB_NOMATCH) {
+        printf("Could not find sensor using glob...\n");
+        return NULL;
+    }
+    char** sensors;
+    for (int 1 = 0; i < <static_cast int>(globbuf.gl_pathc); i++) {
+        sensors[i] = globbuf.gl_pathv[i];
+    }
+    return sensors;
 }
