@@ -17,16 +17,16 @@ class lcd_2004a_i2c {
         int i2c_addr;   // Hex addr of the LCD, typically 0x27 for 2004A
         int blen;       // Need to figure out what this is for
         int device_fd;  // FD for the I2C device
-        
+
         void init();
         void write_word(int data);
         void send_command(int comm);
         void send_data(int data);
-        
+
     public:
         lcd_2004a_i2c(int i2c_address, int blen);
         void clear();
-        void write(int x, int y, char data[]);
+        void write(int x, int y, char const data[]);
 };
 
 #endif

@@ -83,18 +83,42 @@ void lcd_2004a_i2c::clear(){
 	send_command(0x01);	//clear Screen
 }
 
-void lcd_2004a_i2c::write(int x, int y, char data[]){
+void lcd_2004a_i2c::write(int x, int y, char const data[]){
 	int addr, i;
 	int tmp;
 	if (x < 0)  x = 0;
-	if (x > 15) x = 15;
 	if (y < 0)  y = 0;
-	if (y > 1)  y = 1;
 
-	// Move cursor
-	addr = 0x80 + 0x40 * y + x;
+//	if (x > 80) x = 80;
+	if (y > 3)  y = 3;
+
+//    lcd.write(0, 0, "Line 0");
+//    lcd.write(60, 0, "Line 1");
+//    lcd.write(20, 0, "Line 2");
+//    lcd.write(84, 0, "Line 3");
+
+	switch(y) {
+        case 0:
+            addr = 0x80 + x;
+            break;
+        case 1:
+            addr = 0x80 + x + 0x40;
+            break;
+        case 2:
+            addr = 0x80 + 20 + x;
+            break;
+        case 3:
+            addr = 0x80 + 84 + x;
+            break;
+        default:
+            addr = 0x80 + x;
+            break;
+	}
+//        addr = 0x80 + 0x40 * y + x;
+//    }
+
 	send_command(addr);
-	
+
 	tmp = strlen(data);
 	for (i = 0; i < tmp; i++){
 		send_data(data[i]);
