@@ -20,7 +20,7 @@ int get_sensor_names (vector<char*>* sensor_paths);
 int main () {
     printf("Beginning program...\n");
 
-    int lcd_i2c_address = 0x27;
+    int lcd_i2c_address = 0x27;  // Default address for the DS18B20 sensor
     int lcd_blen = 1;
     float temperature_c = 0.0;
     float temperature_f = 0.0;
