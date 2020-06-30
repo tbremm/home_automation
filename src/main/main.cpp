@@ -4,10 +4,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <stdlib.h>
-#include <wiringPi.h>
 #include <string>
-#include <bits/stdc++.h>
-#include <fcntl.h>
 #include <iomanip>
 #include <sstream>
 #include <glob.h>
