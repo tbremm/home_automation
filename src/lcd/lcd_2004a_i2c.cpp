@@ -87,15 +87,10 @@ void lcd_2004a_i2c::write(int x, int y, char const data[]){
 	int addr, i;
 	int tmp;
 	if (x < 0)  x = 0;
+	if (x > 19) x = 19;
 	if (y < 0)  y = 0;
-
-//	if (x > 80) x = 80;
 	if (y > 3)  y = 3;
 
-//    lcd.write(0, 0, "Line 0");
-//    lcd.write(60, 0, "Line 1");
-//    lcd.write(20, 0, "Line 2");
-//    lcd.write(84, 0, "Line 3");
 
 	switch(y) {
         case 0:
@@ -114,8 +109,6 @@ void lcd_2004a_i2c::write(int x, int y, char const data[]){
             addr = 0x80 + x;
             break;
 	}
-//        addr = 0x80 + 0x40 * y + x;
-//    }
 
 	send_command(addr);
 
