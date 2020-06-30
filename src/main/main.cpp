@@ -56,6 +56,7 @@ int main () {
     while(true) {
         for (unsigned int i = 0; i < sensors.size(); i++) {
             temperature_c = sensors[i].get_temp_c();
+            delay(3000);  // Forum says the sensor needs ~750ms between reads
             temperature_f = sensors[i].get_temp_f();
             string strSensorNum = to_string(i);
             char const* chSensorNum = strSensorNum.c_str();
@@ -66,7 +67,6 @@ int main () {
             lcd.write(8, 0, chSensorNum);
             lcd.write(0, 1, format_float("C: ", 2, temperature_c));
             lcd.write(0, 2, format_float("F: ", 2, temperature_f));
-            delay(3000);  // Move me outside the for-loop once we're scrolling the LCD text
         }
     }
     lcd.clear();
