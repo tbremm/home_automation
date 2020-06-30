@@ -29,4 +29,4 @@ class lcd_2004a_i2c {
         void write(int x, int y, char const data[]);
 };
 
-#endif
+#endif  // LCD_2004A_I2C_H_

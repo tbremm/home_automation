@@ -9,6 +9,7 @@
 #include <sstream>
 #include <glob.h>
 #include <vector>
+#include "../../headers/logging.h"
 #include "../../headers/ds18b20_temp_sensor.h"
 #include "../../headers/lcd_2004a_i2c.h"
 
@@ -19,6 +20,8 @@ int get_sensor_names (vector<char*>* sensor_paths);
 
 int main () {
     printf("Beginning program...\n");
+
+//    test_log();
 
     int lcd_i2c_address = 0x27;  // Default address for the DS18B20 sensor
     int lcd_blen = 1;

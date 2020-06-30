@@ -24,9 +24,9 @@ class Ds18b20 {
         float temperature_f;                    // Temperature in farenheit
         char temperature_raw[SIZE_RAW_TEMP];    // Raw temperature from sensor
         char read_buff[READ_BUFF_SIZE];         // Buffer into which the sensor data will be read from sensor_file
-        
+
         int read_raw_temp ();                   // Get the raw temp from the sensor and store in temperature_raw
-        
+
     public:
         Ds18b20 (int gpio, char* sensor_path);  // Constructor
         float get_temp_c ();                    // Returns the temp in Celsius
@@ -35,4 +35,4 @@ class Ds18b20 {
         void print_temp_f ();                   // Prints the temp in F
 };
 
-#endif
+#endif  // DS18B20_TEMP_SENSOR_H_
