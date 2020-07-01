@@ -1,8 +1,9 @@
-#ifndef LOGGING_H_
-#define LOGGING_H_
+#ifndef LOGGER_H_
+#define LOGGER_H_
 
 #include <iostream>
 #include <fstream>
+#include <string>
 
 #define LOG_LEVEL_ERROR 0
 #define LOG_LEVEL_WARN 1
@@ -11,12 +12,12 @@
 
 class Logger {
     private:
-        string log_name;
+        std::string log_name;
 
     public:
-        Logger (string log_filename);
-        void log (int level, string msg); // returns false if logfile can't be opened
-        int test_log (string filename);  // Writes a simple string to the given log location to test logging
+        Logger (std::string log_filename);
+        void log (int level, std::string msg);
+        int test_log ();  // Writes a simple string to the class's log location to test logging
 };
 
-#endif  // LOGGING_H_
+#endif  // LOGGER_H_

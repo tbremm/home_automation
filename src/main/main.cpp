@@ -9,7 +9,7 @@
 #include <sstream>
 #include <glob.h>
 #include <vector>
-#include "../../headers/logging.h"
+#include "../../headers/logger.h"
 #include "../../headers/ds18b20_temp_sensor.h"
 #include "../../headers/lcd_2004a_i2c.h"
 
@@ -22,6 +22,8 @@ int main () {
     printf("Beginning program...\n");
 
 //    test_log();
+    Logger logger("logs/logs.log");
+    logger.log(LOG_LEVEL_DEBUG, "Test debug msg");
 
     int lcd_i2c_address = 0x27;  // Default address for the DS18B20 sensor
     int lcd_blen = 1;
