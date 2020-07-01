@@ -4,8 +4,6 @@
 #include <iostream>
 #include <fstream>
 
-int test_log ();
-
 #define LOG_LEVEL_ERROR 0
 #define LOG_LEVEL_WARN 1
 #define LOG_LEVEL_INFO 2
@@ -13,10 +11,12 @@ int test_log ();
 
 class Logger {
     private:
-        string logloc;
+        string log_name;
 
     public:
-        bool log (string msg, int level);
+        Logger (string log_filename);
+        void log (int level, string msg); // returns false if logfile can't be opened
+        int test_log (string filename);  // Writes a simple string to the given log location to test logging
 };
 
 #endif  // LOGGING_H_
