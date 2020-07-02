@@ -7,6 +7,7 @@
 #include <wiringPi.h>
 #include <wiringPiI2C.h>
 #include <string.h>
+#include "logger.h"
 
 // Typical values
 #define I2C_ADDR 0x27

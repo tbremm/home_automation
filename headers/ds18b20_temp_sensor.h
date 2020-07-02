@@ -10,6 +10,7 @@
 #include <wiringPi.h>
 #include <string.h>
 #include <fcntl.h>
+#include "logger.h"
 
 #define TEMP_DATA_SIZE_BYTES 1  // Size of read data element (1 == byte aka char)
 #define NUM_READ_ELEMENTS 74    // Number of elements in sensor read data

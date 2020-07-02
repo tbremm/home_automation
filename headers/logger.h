@@ -3,12 +3,17 @@
 
 #include <iostream>
 #include <fstream>
+#include <time.h>
 #include <string>
 
-#define LOG_LEVEL_ERROR 0
-#define LOG_LEVEL_WARN 1
-#define LOG_LEVEL_INFO 2
-#define LOG_LEVEL_DEBUG 3
+#define LOG_LOCATION "logs/logs.log"
+
+enum class LogLevel {
+    error,
+    warning,
+    info,
+    debug
+};
 
 class Logger {
     private:
@@ -16,8 +21,12 @@ class Logger {
 
     public:
         Logger (std::string log_filename);
-        void log (int level, std::string msg);
+        void log (LogLevel level, std::string msg);
         int test_log ();  // Writes a simple string to the class's log location to test logging
 };
+
+std::ostream& operator<<( std::ostream &output, const LogLevel &level );
+
+extern Logger logger;
 
 #endif  // LOGGER_H_

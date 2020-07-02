@@ -86,7 +86,10 @@ void lcd_2004a_i2c::clear(){
 void lcd_2004a_i2c::write(int x, int y, char const data[]){
 	int addr, i;
 	int tmp;
-	if (x < 0)  x = 0;
+	if (x < 0) {
+        logger.log(LogLevel::warning, "LCD - X Coord too small: " + std::to_string(x));
+        x = 0;
+    }
 	if (x > 19) x = 19;
 	if (y < 0)  y = 0;
 	if (y > 3)  y = 3;

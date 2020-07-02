@@ -19,11 +19,7 @@ char const* format_float (string prefix, int precision, float f);
 int get_sensor_names (vector<char*>* sensor_paths);
 
 int main () {
-    printf("Beginning program...\n");
-
-//    test_log();
-    Logger logger("logs/logs.log");
-    logger.log(LOG_LEVEL_DEBUG, "Test debug msg");
+    logger.log(LogLevel::debug, "Beginning program...");
 
     int lcd_i2c_address = 0x27;  // Default address for the DS18B20 sensor
     int lcd_blen = 1;
@@ -37,7 +33,7 @@ int main () {
     // Get the list of sensor device paths
     sensor_err = get_sensor_names (&sensor_paths);
     if (sensor_err != 0 || sensor_paths.size() == 0) {
-        printf("Could not find any sensors, quitting...\n");
+        logger.log(LogLevel::error, "Could not find any sensors, quitting...");
         return sensor_err;
     }
 
@@ -45,10 +41,11 @@ int main () {
 
     // Get GPIO pin for each sensor and create a new sensor object for each
     for (unsigned int i = 0; i < sensor_paths.size(); i++) {
-        printf("Enter GPIO pin for sensor: %s\n", sensor_paths[i]);
+        cout << "Enter GPIO pin for sensor: " << sensor_paths[i] << endl;
         cin >> gpio_pin;
         Ds18b20 sensor(gpio_pin, sensor_paths[i]);
         sensors.push_back(sensor);
+        logger.log(LogLevel::info, "New sensor created: " + string(sensor_paths[i]));
     }
 
     // Init the LCD
@@ -92,7 +89,7 @@ int get_sensor_names (vector<char*>* sensor_paths) {
 
     // Find all matching paths
     if (glob("/sys/bus/w1/devices/28-*/w1_slave", 0, NULL, &globbuf) == GLOB_NOMATCH) {
-        printf("Could not find any sensors using glob...\n");
+        logger.log(LogLevel::error, "Could not find any sensors using glob...");
         return -1;
     }
 
