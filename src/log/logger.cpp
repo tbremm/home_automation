@@ -9,10 +9,11 @@ Logger::Logger (string log_filename) {
 }
 
 void Logger::log (LogLevel level, string msg) {
-    // TODO: Accept var args so callers can format string within call
     ofstream logfile (log_name, ios::out | ios::app);  // Output and append mode
-    if (!logfile.is_open()) return;
-
+    if (!logfile.is_open()) {
+        cout << LogLevel::debug << "Could not open log file: " << log_name << endl;
+        return;
+    }
     // Get the current local time to prepend to the log line
     time_t raw_time;
     struct tm* timeinfo;
@@ -54,7 +55,7 @@ int Logger::test_log () {
         return 1;
     }
     logfile << LogLevel::debug << "Test log success!\n";
-    cout << "Successfully logged to ./logs/" << log_name << endl;
+    cout << "Successfully logged to " << log_name << endl;
     logfile.close();
     return 0;
 }

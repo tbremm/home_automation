@@ -12,10 +12,10 @@
 #include <fcntl.h>
 #include "logger.h"
 
-#define TEMP_DATA_SIZE_BYTES 1  // Size of read data element (1 == byte aka char)
-#define NUM_READ_ELEMENTS 74    // Number of elements in sensor read data
-#define SIZE_RAW_TEMP 5         // Number of digits in raw temp value
-#define READ_BUFF_SIZE 100      // Size of the read buffer (aka num of chars to read, need to see exactly how many this is)
+const int TEMP_DATA_SIZE_BYTES = 1;  // Size of read data element (1 == byte aka char)
+const int NUM_READ_ELEMENTS = 74;    // Number of elements in sensor read data
+const int SIZE_RAW_TEMP = 5;         // Number of digits in raw temp value
+const int READ_BUFF_SIZE = 100;      // Size of the read buffer (aka num of chars to read, need to see exactly how many this is)
 
 class Ds18b20 {
     private:

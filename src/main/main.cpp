@@ -1,5 +1,4 @@
-// Top level source file
-// Reads temperature data from sensor and displays on the LCD
+// Reads temperature data from DS18B20 sensors and displays on an LCD
 
 #include <stdio.h>
 #include <iostream>

@@ -10,8 +10,8 @@
 #include "logger.h"
 
 // Typical values
-#define I2C_ADDR 0x27
-#define BLEN 1
+const int I2C_ADDR = 0x27;
+const int BLEN = 1;
 
 class lcd_2004a_i2c {
     private:

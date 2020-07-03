@@ -1,3 +1,6 @@
 [07/02/20 13:59] DEBUG: Beginning program...
 [07/02/20 13:59] INFO: New sensor created: /sys/bus/w1/devices/28-3c01b556f240/w1_slave
 [07/02/20 13:59] INFO: New sensor created: /sys/bus/w1/devices/28-3c01d6073581/w1_slave
+[07/02/20 19:02] DEBUG: Beginning program...
+[07/02/20 19:02] INFO: New sensor created: /sys/bus/w1/devices/28-3c01b556f240/w1_slave
+[07/02/20 19:02] INFO: New sensor created: /sys/bus/w1/devices/28-3c01d6073581/w1_slave

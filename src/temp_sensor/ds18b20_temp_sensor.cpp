@@ -17,6 +17,8 @@ Ds18b20::Ds18b20 (int gpio, char* sensor_path) {
 int Ds18b20::read_raw_temp () {
     FILE* sensor_fd = fopen(sensor_file_path,"r");
     if (sensor_fd == NULL) {
+        std::string err (sensor_file_path);
+//        logger.log(LogLevel.error, "Could not open sensor file: ");
         printf("\nfopen Error, could not open sensor file\n\n");
         return -1;
     }

@@ -80,27 +80,36 @@ void lcd_2004a_i2c::send_data(int data){
 }
 
 void lcd_2004a_i2c::clear(){
-	send_command(0x01);	//clear Screen
+	send_command(0x01);	// Clear Screen
 }
 
 void lcd_2004a_i2c::write(int x, int y, char const data[]){
 	int addr, i;
 	int tmp;
 	if (x < 0) {
-        logger.log(LogLevel::warning, "LCD - X Coord too small: " + std::to_string(x));
+        logger.log(LogLevel::warning, "LCD - X Coord too small: " + std::to_string(y));
         x = 0;
     }
-	if (x > 19) x = 19;
-	if (y < 0)  y = 0;
-	if (y > 3)  y = 3;
+	if (x > 19) {
+        logger.log(LogLevel::warning, "LCD - X Coord too big: " + std::to_string(y));
+        x = 19;
+    }
+	if (y < 0) {
+        logger.log(LogLevel::warning, "LCD - Y Coord too small: " + std::to_string(y));
+        y = 0;
+    }
+	if (y > 3) {
+        logger.log(LogLevel::warning, "LCD - Y Coord too big: " + std::to_string(y));
+        y = 3;
+    }
 
-
+    // Funky math is needed because the screen wraps lines 1 -> 3 and 2 -> 4
 	switch(y) {
         case 0:
             addr = 0x80 + x;
             break;
         case 1:
-            addr = 0x80 + x + 0x40;
+            addr = 0x80 + 64 + x;
             break;
         case 2:
             addr = 0x80 + 20 + x;
